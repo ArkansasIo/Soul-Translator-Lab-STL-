@@ -1,0 +1,5 @@
+[project]
+name = "soul-translator-lab"
+version = "0.1.0"
+description = "Educational neuroscience notes and a fictional STL-inspired simulation"
+requires-python = ">=3.10"
