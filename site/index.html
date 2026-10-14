@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#07111f">
+  <meta name="description" content="Soul Translator Lab — an educational synthetic-signal and virtual-world simulation.">
+  <title>Soul Translator Lab</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#overview" aria-label="Soul Translator Lab home">
+        <span class="brand-mark">STL</span><span><strong>SOUL TRANSLATOR</strong><small>RESEARCH LAB / 0.2</small></span>
+      </a>
+      <div class="nav-label">WORKSPACE</div>
+      <button class="nav-item active" data-view="overview"><span>◈</span> Overview</button>
+      <button class="nav-item" data-view="simulation"><span>◎</span> Virtual world</button>
+      <button class="nav-item" data-view="signals"><span>〰</span> Signal studio</button>
+      <button class="nav-item" data-view="agent"><span>◉</span> Agent memory</button>
+      <button class="nav-item" data-view="research"><span>⌘</span> Research library</button>
+      <div class="sidebar-bottom">
+        <div class="status"><span class="status-dot"></span><span><strong>LOCAL SIMULATION</strong><small>No sensors connected</small></span></div>
+        <a href="https://github.com/ArkansasIo/Soul-Translator-Lab-STL-" target="_blank" rel="noreferrer">Repository ↗</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><div class="eyebrow">EDUCATIONAL SYSTEMS ENVIRONMENT</div><h1 id="page-title">Lab overview</h1></div>
+        <div class="top-actions"><span class="mode-tag">DEMO MODE</span><button id="reset-btn" class="button ghost">Reset demo</button></div>
+      </header>
+
+      <div class="notice" role="note"><strong>Research boundary</strong><span>This application uses synthetic data and a fictional-agent model. It cannot read, transfer, or reproduce human consciousness, thoughts, or memories.</span></div>
+
+      <section class="view active" id="view-overview">
+        <div class="hero panel">
+          <div class="hero-copy"><div class="eyebrow">STL / SIMULATION CORE</div><h2>Explore a modelled world.<br><em>Keep the science grounded.</em></h2><p>Experiment with accelerated simulation time, explicit agent state, skill updates, memory entries, and generated noisy signals in a contained local demo.</p><div class="hero-actions"><button class="button primary" data-go="simulation">Open simulation <span>→</span></button><button class="button secondary" data-go="research">Read research notes</button></div></div>
+          <div class="orbital" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div><div class="core"></div><span class="orbit-label label-a">SYNTHETIC INPUT</span><span class="orbit-label label-b">VIRTUAL STATE</span><span class="orbit-label label-c">MODEL OUTPUT</span></div>
+        </div>
+        <div class="stat-grid">
+          <article class="metric panel"><span class="metric-label">SIMULATED TIME</span><strong id="metric-time">0.0 <small>sec</small></strong><span class="metric-foot">Agent world clock</span></article>
+          <article class="metric panel"><span class="metric-label">LEARNED SKILLS</span><strong id="metric-skills">0</strong><span class="metric-foot">Explicit toy values</span></article>
+          <article class="metric panel"><span class="metric-label">MEMORY ENTRIES</span><strong id="metric-memories">0</strong><span class="metric-foot">Local session only</span></article>
+          <article class="metric panel"><span class="metric-label">SIGNAL SAMPLES</span><strong id="metric-samples">0</strong><span class="metric-foot">Generated, not recorded</span></article>
+        </div>
+        <div class="two-col">
+          <article class="panel section-panel"><div class="panel-heading"><div><div class="eyebrow">QUICK ACCESS</div><h3>Lab modules</h3></div><span class="subtle">04 modules</span></div><div class="module-list"><button data-go="simulation" class="module-row"><span class="module-icon">◎</span><span><strong>Virtual world</strong><small>Adjust time scaling and advance the world clock.</small></span><span class="chevron">→</span></button><button data-go="signals" class="module-row"><span class="module-icon">〰</span><span><strong>Signal studio</strong><small>Generate repeatable noisy demo samples.</small></span><span class="chevron">→</span></button><button data-go="agent" class="module-row"><span class="module-icon">◉</span><span><strong>Agent memory</strong><small>Teach a skill or add a memory record.</small></span><span class="chevron">→</span></button><button data-go="research" class="module-row"><span class="module-icon">⌘</span><span><strong>Research library</strong><small>Read background notes and scientific limits.</small></span><span class="chevron">→</span></button></div></article>
+          <article class="panel section-panel"><div class="panel-heading"><div><div class="eyebrow">SESSION ACTIVITY</div><h3>Recent events</h3></div><button id="clear-log" class="text-button">Clear</button></div><div id="activity-log" class="activity-list" aria-live="polite"><div class="empty-state">The session is quiet. Run a simulation or generate a signal to begin.</div></div></article>
+        </div>
+      </section>
+
+      <section class="view" id="view-simulation">
+        <div class="section-intro"><div class="eyebrow">TIME-SCALE EXPERIMENT</div><h2>Virtual world clock</h2><p>Advance a toy world clock relative to real elapsed seconds. No real-world time is modified.</p></div>
+        <div class="two-col sim-grid">
+          <article class="panel section-panel"><div class="panel-heading"><div><div class="eyebrow">WORLD CONTROLS</div><h3>Time acceleration</h3></div><span class="mode-tag">TOY MODEL</span></div><div class="clock-readout"><span>SIMULATED WORLD TIME</span><strong id="sim-clock">0.00 <small>seconds</small></strong><div class="progress-track"><div id="time-progress" class="progress-fill"></div></div><div class="clock-meta"><span>Real input: <b id="real-input-label">1 sec</b></span><span>Ratio: <b id="ratio-label">100×</b></span></div></div><label class="field-label" for="ratio-range">Acceleration ratio</label><div class="range-row"><input id="ratio-range" type="range" min="1" max="1000" value="100" step="1"><output id="ratio-output">100×</output></div><div class="field-label">Advance by real seconds</div><div class="button-row"><button class="button secondary advance" data-seconds="1">+1 sec</button><button class="button secondary advance" data-seconds="10">+10 sec</button><button class="button secondary advance" data-seconds="60">+60 sec</button></div><div class="field-group"><label class="field-label" for="custom-seconds">Custom real seconds</label><div class="input-row"><input id="custom-seconds" type="number" min="0" max="86400" step="0.1" value="5"><button id="advance-custom" class="button primary">Advance clock</button></div></div></article>
+          <article class="panel section-panel"><div class="panel-heading"><div><div class="eyebrow">ACTIVE ENTITY</div><h3>Underworld-01</h3></div><span class="pill"><span class="status-dot"></span> Running locally</span></div><div class="entity-card"><div class="entity-avatar">U<span>01</span></div><div><strong>Simulated agent</strong><p>State is explicit, inspectable and stored in this browser session.</p></div></div><div class="details-table"><div><span>World clock</span><strong id="detail-time">0.00 s</strong></div><div><span>Acceleration</span><strong id="detail-ratio">100×</strong></div><div><span>Skill entries</span><strong id="detail-skills">0</strong></div><div><span>Memory entries</span><strong id="detail-memories">0</strong></div></div><div class="small-note">This simplified clock multiplies requested real seconds by the selected ratio. It is a software demonstration, not a model of biological time perception.</div></article>
+        </div>
+      </section>
+
+      <section class="view" id="view-signals">
+        <div class="section-intro"><div class="eyebrow">SYNTHETIC DATA WORKBENCH</div><h2>Signal studio</h2><p>Generate a toy scalar signal with controllable amplitude and noise. Samples are synthesized by this page; no device or human data is read.</p></div>
+        <div class="signal-grid">
+          <article class="panel section-panel signal-controls"><div class="panel-heading"><div><div class="eyebrow">GENERATOR SETTINGS</div><h3>Signal parameters</h3></div><span class="mode-tag">SYNTHETIC</span></div><label class="field-label" for="amplitude-range">Base amplitude</label><div class="range-row"><input id="amplitude-range" type="range" min="-2" max="2" step="0.1" value="1"><output id="amplitude-output">1.0</output></div><label class="field-label" for="noise-range">Noise standard deviation</label><div class="range-row"><input id="noise-range" type="range" min="0" max="1" step="0.05" value="0.15"><output id="noise-output">0.15</output></div><label class="field-label" for="channel-name">Channel label</label><input class="text-input" id="channel-name" maxlength="40" value="demo-channel"><button id="sample-btn" class="button primary full">＋ Generate sample</button><button id="sample-batch-btn" class="button secondary full">Generate 20 samples</button></article>
+          <article class="panel section-panel chart-panel"><div class="panel-heading"><div><div class="eyebrow">LIVE OUTPUT</div><h3>Sample amplitude</h3></div><span class="chart-legend"><i></i> Sample</span></div><div class="chart-summary"><strong id="latest-value">—</strong><span>Latest amplitude</span><strong id="avg-value">—</strong><span>Session mean</span></div><canvas id="signal-chart" aria-label="Chart of synthetic signal samples" role="img"></canvas><div class="chart-foot"><span id="sample-count">0 samples</span><span>Generated locally · no external data</span></div></article>
+        </div>
+        <article class="panel section-panel table-panel"><div class="panel-heading"><div><div class="eyebrow">SAMPLE HISTORY</div><h3>Recent readings</h3></div><button id="export-signals" class="button secondary small-button">Export CSV</button></div><div class="table-wrap"><table><thead><tr><th>#</th><th>Channel</th><th>Amplitude</th><th>Noise</th><th>Time</th></tr></thead><tbody id="signal-table"><tr><td colspan="5" class="empty-cell">No samples yet. Generate one above.</td></tr></tbody></table></div></article>
+      </section>
+
+      <section class="view" id="view-agent">
+        <div class="section-intro"><div class="eyebrow">EXPLICIT SIMULATION STATE</div><h2>Agent memory & skills</h2><p>Manage invented agent state directly. These records are not human memories and do not infer mental content.</p></div>
+        <div class="two-col">
+          <article class="panel section-panel"><div class="panel-heading"><div><div class="eyebrow">SKILL MODEL</div><h3>Teach a skill</h3></div><span class="subtle">Range 0–1</span></div><form id="skill-form"><label class="field-label" for="skill-name">Skill / topic</label><input id="skill-name" class="text-input" maxlength="60" placeholder="e.g. spatial navigation" required><label class="field-label" for="skill-amount">Learning increment</label><div class="range-row"><input id="skill-amount" type="range" min="0.05" max="0.5" step="0.05" value="0.1"><output id="skill-amount-output">+0.10</output></div><button class="button primary full" type="submit">Teach agent</button></form><div class="divider"></div><div class="panel-heading"><h3>Skill levels</h3><span class="subtle" id="skill-count-label">0 skills</span></div><div id="skills-list" class="skills-list"><div class="empty-state">No skills learned in this session.</div></div></article>
+          <article class="panel section-panel"><div class="panel-heading"><div><div class="eyebrow">EVENT STORE</div><h3>Add a memory</h3></div><span class="subtle">Local only</span></div><form id="memory-form"><label class="field-label" for="memory-text">Memory note</label><textarea id="memory-text" class="text-input textarea" rows="3" maxlength="500" placeholder="Describe a fictional event for Underworld-01…" required></textarea><button class="button primary full" type="submit">＋ Add memory</button></form><div class="divider"></div><div class="panel-heading"><h3>Memory records</h3><span class="subtle" id="memory-count-label">0 entries</span></div><div id="memories-list" class="memory-list"><div class="empty-state">No memory records yet.</div></div><div class="small-note">Data remains in this page's in-memory state and clears when you reset the demo or reload the page.</div></article>
+        </div>
+      </section>
+
+      <section class="view" id="view-research">
+        <div class="section-intro"><div class="eyebrow">REFERENCE LIBRARY</div><h2>Research notes</h2><p>Introductory context for neural systems, BCIs, measurement, and responsible research.</p></div>
+        <div class="research-grid">
+          <article class="panel research-card"><span class="research-index">01 / SYSTEMS</span><h3>Brain systems</h3><p>Complex brain functions arise from interacting networks. No single structure is a complete memory store or a consciousness switch.</p><ul><li><strong>Cerebral cortex</strong><span>Distributed perception, language, planning and action.</span></li><li><strong>Hippocampal formation</strong><span>Important in many forms of episodic and spatial memory.</span></li><li><strong>Thalamus</strong><span>Participates in relaying and coordinating information streams.</span></li><li><strong>Cerebellum</strong><span>Supports timing, coordination, and motor learning.</span></li></ul></article>
+          <article class="panel research-card"><span class="research-index">02 / METHODS</span><h3>Measurement & BCIs</h3><p>Brain-computer interfaces decode limited, task-specific information; results depend on sensors, training, and context.</p><ul><li><strong>EEG</strong><span>Scalp electrical potentials, high temporal resolution and limited spatial precision.</span></li><li><strong>fMRI</strong><span>Indirect blood-oxygenation signals with slower temporal response.</span></li><li><strong>Signal processing</strong><span>Filtering and statistical analysis require awareness of noise and artifacts.</span></li></ul></article>
+          <article class="panel research-card"><span class="research-index">03 / LIMITATIONS</span><h3>What this project is not</h3><p>The “Soul Translator” is a fictional concept. Current science does not offer technology to upload a person or copy unrestricted mental contents.</p><ul><li><strong>No real neural input</strong><span>All values in Signal Studio are generated synthetic samples.</span></li><li><strong>No consciousness transfer</strong><span>Agent state is a small, inspectable data structure.</span></li><li><strong>No clinical use</strong><span>This demo is not a medical device or diagnostic tool.</span></li></ul></article>
+          <article class="panel research-card"><span class="research-index">04 / ETHICS</span><h3>Responsible research</h3><p>Neural data can be sensitive. Human-subject research requires appropriate expert oversight, consent, protection, and compliance.</p><ul><li><strong>Consent</strong><span>Use informed, voluntary participation for human research.</span></li><li><strong>Data minimization</strong><span>Collect only what is needed and define retention.</span></li><li><strong>Security</strong><span>Restrict access and avoid publishing sensitive raw data.</span></li></ul></article>
+        </div>
+        <article class="panel section-panel sources-panel"><div class="panel-heading"><div><div class="eyebrow">STARTING POINTS</div><h3>External research resources</h3></div></div><a href="https://www.ninds.nih.gov/health-information/public-education/brain-basics" target="_blank" rel="noreferrer">NINDS — Brain Basics <span>↗</span></a><a href="https://braininitiative.nih.gov/" target="_blank" rel="noreferrer">NIH BRAIN Initiative <span>↗</span></a><a href="https://www.nimh.nih.gov/" target="_blank" rel="noreferrer">National Institute of Mental Health <span>↗</span></a><a href="https://nap.nationalacademies.org/" target="_blank" rel="noreferrer">National Academies Press <span>↗</span></a></article>
+      </section>
+
+      <footer class="footer"><span>SOUL TRANSLATOR LAB · EDUCATIONAL DEMO</span><span>STATIC CLIENT APP · NO EXTERNAL DATA COLLECTION</span></footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js" defer></script>
+</body>
+</html>
