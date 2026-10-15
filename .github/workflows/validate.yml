@@ -1,0 +1,70 @@
+name: Validate STL Lab
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python-tests:
+    name: Python unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Compile Python sources
+        run: python -m compileall -q main.py stl_lab tests
+
+  browser-checks:
+    name: Static browser application checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Validate required files
+        run: |
+          test -s site/index.html
+          test -s site/styles.css
+          test -s site/app.js
+          test -s index.html
+      - name: Validate JavaScript syntax
+        run: node --check site/app.js
+      - name: Verify local asset references
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          root = Path(".")
+          html = (root / "site/index.html").read_text(encoding="utf-8")
+          refs = re.findall(r'(?:src|href)="([^"]+)"', html)
+          missing = []
+          for ref in refs:
+              if ref.startswith(("https://", "http://", "#", "mailto:", "data:")):
+                  continue
+              path = (root / "site" / ref.split("?", 1)[0].split("#", 1)[0]).resolve()
+              if not path.is_file():
+                  missing.append(ref)
+          if missing:
+              raise SystemExit("Missing local asset(s): " + ", ".join(missing))
+          print("All local asset references in site/index.html exist.")
+          PY
